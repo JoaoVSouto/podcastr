@@ -76,12 +76,12 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
         <table cellSpacing={0}>
           <thead>
             <tr>
-              <th></th>
+              <th />
               <th>Podcast</th>
               <th>Integrantes</th>
               <th>Data</th>
               <th>Duração</th>
-              <th></th>
+              <th />
             </tr>
           </thead>
 
