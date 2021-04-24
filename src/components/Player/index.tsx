@@ -1,11 +1,19 @@
+import * as React from 'react';
+
+import { PlayerContext } from '../../contexts/PlayerContext';
+
 import styles from './styles.module.scss';
 
 export default function Player() {
+  const { episodeList, currentEpisodeIndex } = React.useContext(PlayerContext);
+
+  const episode = episodeList[currentEpisodeIndex];
+
   return (
     <div className={styles.playerContainer}>
       <header>
         <img src="/playing.svg" alt="Fone de ouvido com linha" />
-        <strong>Tocando agora</strong>
+        <strong>Tocando agora {episode?.title}</strong>
       </header>
 
       <div className={styles.emptyPlayer}>
