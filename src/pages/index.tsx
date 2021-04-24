@@ -30,7 +30,9 @@ type HomeProps = {
 };
 
 export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
-  const { play } = React.useContext(PlayerContext);
+  const { playList } = React.useContext(PlayerContext);
+
+  const episodeList = [...latestEpisodes, ...allEpisodes];
 
   return (
     <div className={styles.homepage}>
@@ -38,7 +40,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
         <h2>Últimos lançamentos</h2>
 
         <ul>
-          {latestEpisodes.map(episode => (
+          {latestEpisodes.map((episode, index) => (
             <li key={episode.id}>
               <Image
                 width={192}
@@ -57,7 +59,10 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                 <span>{episode.durationAsString}</span>
               </div>
 
-              <button type="button" onClick={() => play(episode)}>
+              <button
+                type="button"
+                onClick={() => playList(episodeList, index)}
+              >
                 <img src="/play-green.svg" alt="Tocar episódio" />
               </button>
             </li>
@@ -81,7 +86,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
           </thead>
 
           <tbody>
-            {allEpisodes.map(episode => (
+            {allEpisodes.map((episode, index) => (
               <tr key={episode.id}>
                 <td className={styles.imageCell}>
                   <Image
@@ -103,7 +108,12 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                 </td>
                 <td>{episode.durationAsString}</td>
                 <td>
-                  <button type="button" onClick={() => play(episode)}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      playList(episodeList, index + latestEpisodes.length)
+                    }
+                  >
                     <img src="/play-green.svg" alt="Tocar episódio" />
                   </button>
                 </td>
