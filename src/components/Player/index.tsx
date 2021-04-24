@@ -16,6 +16,7 @@ export default function Player() {
     currentEpisodeIndex,
     isPlaying,
     togglePlay,
+    setPlayingState,
   } = React.useContext(PlayerContext);
 
   React.useEffect(() => {
@@ -73,7 +74,15 @@ export default function Player() {
           <span>00:00</span>
         </div>
 
-        {episode && <audio ref={audioRef} src={episode.url} autoPlay />}
+        {episode && (
+          <audio
+            ref={audioRef}
+            src={episode.url}
+            autoPlay
+            onPlay={() => setPlayingState(true)}
+            onPause={() => setPlayingState(false)}
+          />
+        )}
 
         <div className={styles.buttons}>
           <button type="button" disabled={!episode}>
