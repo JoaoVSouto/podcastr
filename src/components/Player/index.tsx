@@ -54,6 +54,8 @@ export default function Player() {
           <span>00:00</span>
         </div>
 
+        {episode && <audio src={episode.url} autoPlay />}
+
         <div className={styles.buttons}>
           <button type="button" title="Embaralhar" disabled={!episode}>
             <img src="/shuffle.svg" alt="Embaralhar" />
