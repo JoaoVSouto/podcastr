@@ -24,6 +24,7 @@ type PlayerContextData = {
   toggleLoop(): void;
   toggleShuffle(): void;
   setPlayingState(state: boolean): void;
+  clearPlayerState(): void;
 };
 
 type PlayerContextProviderProps = {
@@ -73,7 +74,7 @@ export function PlayerContextProvider({
 
   const hasPrevious = currentEpisodeIndex > 0;
 
-  const hasNext = currentEpisodeIndex + 1 < episodeList.length;
+  const hasNext = isShuffling || currentEpisodeIndex + 1 < episodeList.length;
 
   function playNext() {
     if (isShuffling) {
@@ -94,6 +95,11 @@ export function PlayerContextProvider({
     }
   }
 
+  function clearPlayerState() {
+    setEpisodeList([]);
+    setCurrentEpisodeIndex(0);
+  }
+
   return (
     <PlayerContext.Provider
       value={{
@@ -112,6 +118,7 @@ export function PlayerContextProvider({
         setPlayingState,
         hasPrevious,
         hasNext,
+        clearPlayerState,
       }}
     >
       {children}
